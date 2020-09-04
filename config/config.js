@@ -17,5 +17,11 @@ module.exports = {
     }),
     multer: {
         storage: multer.memoryStorage()
+    },
+    session: {
+        secret: 'session secret',
+        resave: false,
+        saveUninitialized: true,
+        cookie: {}
     }
 };
