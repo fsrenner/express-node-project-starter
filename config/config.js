@@ -18,10 +18,24 @@ module.exports = {
     multer: {
         storage: multer.memoryStorage()
     },
+    document: 'file',
     session: {
         secret: 'session secret',
         resave: false,
         saveUninitialized: true,
         cookie: {}
+    },
+    passport: {
+        facebook: {
+            clientID: 'some-fb-client-id',
+            clientSecret: 'some-secret',
+            callbackURL: "http://localhost:3001/auth/facebook/callback"
+        },
+        google: {
+            consumerKey: GOOGLE_CONSUMER_KEY,
+            consumerSecret: GOOGLE_CONSUMER_SECRET,
+            callbackURL: "http://www.example.com/auth/google/callback"
+        }
     }
+    
 };

@@ -1,10 +1,7 @@
 const config = require('../config/config');
-const multer = require('multer');
-
-const FILE = 'file';
-
 const Logger = config.logger;
-const upload = multer(config.multer).single(FILE);
+const multer = require('multer');
+const upload = multer(config.multer).single(config.document);
 
 // Adjust file upload setup for future reference and change
 const uploadDocument = async (req, res) => {
