@@ -24,7 +24,6 @@
     "cors": "^2.8.5",
     "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
-    "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "flat": "^5.0.2",
