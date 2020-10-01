@@ -22,20 +22,17 @@ module.exports = {
     session: {
         secret: 'session secret',
         resave: false,
-        saveUninitialized: true,
-        cookie: {}
+        saveUninitialized: false,
+        cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }
     },
-    passport: {
-        facebook: {
-            clientID: 'some-fb-client-id',
-            clientSecret: 'some-secret',
-            callbackURL: "http://localhost:3001/auth/facebook/callback"
-        },
-        google: {
-            consumerKey: GOOGLE_CONSUMER_KEY,
-            consumerSecret: GOOGLE_CONSUMER_SECRET,
-            callbackURL: "http://www.example.com/auth/google/callback"
-        }
+    db: {
+        database: process.env.DB || 'test',
+        user: process.env.DB_USER || 'test',
+        pass: process.env.DB_PASS || 'test',
+        host: process.env.DB_HOST || 'localhost',
+        port: process.env.DB_PORT || 5432,
+        ssl: process.env.DB_SSL || false,
+        dialect: process.env.DB_DIALECT || 'postgres',
+        eraseDatabaseOnSync: false
     }
-    
 };

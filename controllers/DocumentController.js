@@ -1,4 +1,4 @@
-const config = require('../config/config');
+const config = require('../config/appConfig');
 const Logger = config.logger;
 const multer = require('multer');
 const upload = multer(config.multer).single(config.document);

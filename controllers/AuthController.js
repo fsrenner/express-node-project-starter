@@ -1,29 +1,38 @@
-const config = require('../config/config');
-const { response } = require('express');
+const { formatRelativeWithOptions } = require('date-fns/fp');
+const config = require('../config/appConfig');
+const User = require('../models').User;
 const Logger = config.logger;
 
-const login = async (req, res) => {
-    const username = req.body.username;
-    const email = req.body.email;
-    const password = req.body.password;
-    // Lookup User
-    // Ensure passwords match
-    // Set session id
-    req.session.userId = Math.floor(Math.random() * Math.floor(100));
-    // respond with User data
-    return res.json({
-        username,
-        email
-    });
-};
-
-const unauthorized = async (req, res) => {
-    return res.status(401).json({
-        message: 'You are not authorized to access this application'
-    });
-};
-
 module.exports = {
-    login,
-    unauthorized
+    login: async (req, res) => {
+        const username = req.body.username;
+        const password = req.body.password;
+        const user = await User.findOne({
+            where: {
+              username,
+              password
+            }
+        });
+        if (!user) {
+            return res.status(404).json({
+                message: `User: ${username} was not found`
+            });
+        }
+        req.session.userId = user.id;
+        // respond with User data
+        return res.json({
+            user
+        });
+    },
+    unauthorized: async (req, res) => {
+        return res.status(401).json({
+            message: 'You are not authorized to access this application'
+        });
+    },
+    logout: async (req, res) => {
+        req.logout();
+        res.send({
+            message: 'You have successfully logged out of the application'
+        })
+    }
 };
